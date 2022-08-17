@@ -4043,6 +4043,7 @@ public class InventoryHandler {
     }
 
     public static final void Pickup_Pet(final LittleEndianAccessor slea, final MapleClient c, final MapleCharacter chr) {
+        /*
         if (chr == null) {
             return;
         }
@@ -4122,6 +4123,130 @@ public class InventoryHandler {
         } finally {
             lock.unlock();
         }
+        */
+
+        for (MapleMapItem mapitem : chr.getMap().getAllItems()) { // 펫 오토 루팅
+            if (mapitem.getDropper().getType() == MapleMapObjectType.MONSTER) { // 오토 루팅의 조건은 몬스터에게서 드랍되는 템 기준만. 그외의 아이템은 먹지않음. 사람한테서 떨군다거나. 등등.
+                final MapleMapObject ob = chr.getMap().getMapObject(mapitem.getObjectId(), MapleMapObjectType.ITEM);
+                final Lock lock = mapitem.getLock();
+                lock.lock();
+                try {
+                    if (mapitem.isPickedUp()) {
+                        c.getSession().write(MaplePacketCreator.enableActions());
+                        continue;
+                    }
+                    if (mapitem.getQuest() > 0 && chr.getQuestStatus(mapitem.getQuest()) != 1) {
+                        c.getSession().write(MaplePacketCreator.enableActions());
+                        continue;
+                    }
+                    if (mapitem.getOwner() != chr.getId() && ((!mapitem.isPlayerDrop() && mapitem.getDropType() == 0) || (mapitem.isPlayerDrop() && chr.getMap().getEverlast()))) {
+                        c.getSession().write(MaplePacketCreator.enableActions());
+                        continue;
+                    }
+                    if (!mapitem.isPlayerDrop() && mapitem.getDropType() == 1 && mapitem.getOwner() != chr.getId() && (chr.getParty() == null || chr.getParty().getMemberById(mapitem.getOwner()) == null)) {
+                        c.getSession().write(MaplePacketCreator.enableActions());
+                        continue;
+                    }
+                    if (mapitem.getMeso() <= 0) {
+                        final boolean canShow;
+                        //Pair<Integer, Integer> questInfo = MapleItemInformationProvider.getInstance().getQuestItemInfo(mapitem.getItemId());
+                        //if (questInfo != null && questInfo.getLeft() == mapitem.getQuest()) {
+                        //    canShow = !chr.haveItem(mapitem.getItemId(), questInfo.getRight(), true, true);
+                        //} else {
+                        canShow = true;
+                        //}
+                        //퀘스트 아이템은 필요 갯수를 초과하여 먹을 수 없음.
+//                chr.dropMessage(6, MapleItemInformationProvider.getInstance().getName(mapitem.getItemId()) + " is can pickup ? " + canShow + " / questInfo : " + questInfo);
+                        if (!canShow) {
+                            c.getSession().write(InventoryPacket.getInventoryFull());
+                            c.getSession().write(InventoryPacket.getShowInventoryFull());
+                            c.getSession().write(MaplePacketCreator.enableActions());
+                            return;
+                        }
+                    }
+                    if (mapitem.getOwner() != c.getPlayer().getId()) {
+                        c.getSession().write(MaplePacketCreator.enableActions());
+                        continue;
+                    }
+                    if (mapitem.getMeso() > 0) {
+                        if (chr.getParty() != null) {
+                            final List<MapleCharacter> toGive = new LinkedList<MapleCharacter>();
+                            final int splitMeso = mapitem.getMeso() * 40 / 100;
+                            int givenMeso = 0;
+                            for (MaplePartyCharacter pChr : chr.getParty().getMembers()) {
+                                MapleCharacter otherChar = chr.getMap().getCharacterById(pChr.getId());
+                                if (otherChar != null && otherChar.getId() != chr.getId()) {
+                                    toGive.add(otherChar);
+                                }
+                            }
+                            for (final MapleCharacter m : toGive) {
+                                int meso = splitMeso / toGive.size();
+                                if (mapitem.getDropper().getType() == MapleMapObjectType.MONSTER) {
+                                    m.gainMeso(meso, true);
+                                } else {
+                                    m.gainMeso(meso, true);
+                                }
+                                givenMeso += meso;
+                            }
+                            //if (c.getPlayer().hasEquipped(1122242)) {//
+                            //    chr.gainMeso((mapitem.getMeso() - givenMeso) + ((mapitem.getMeso() - givenMeso)/20), true);
+                            //} else if (c.getPlayer().hasEquipped(1122244)) {//
+                            //    chr.gainMeso((mapitem.getMeso() - givenMeso) + ((mapitem.getMeso() - givenMeso)/10), true);
+                            //} else {
+                            chr.gainMeso(mapitem.getMeso() - givenMeso, true);
+                            //}
+                            c.getSession().write(MaplePacketCreator.enableActions());
+                        } else {
+                            if (mapitem.getDropper().getType() == MapleMapObjectType.MONSTER) {
+                                //if (c.getPlayer().hasEquipped(1122242)) {//
+                                //    chr.gainMeso(mapitem.getMeso() + (mapitem.getMeso()/20), true);
+                                //} else if (c.getPlayer().hasEquipped(1122244)) {//
+                                //    chr.gainMeso(mapitem.getMeso() + (mapitem.getMeso()/10), true);
+                                //} else {
+                                chr.gainMeso(mapitem.getMeso(), true);
+                                //}
+                            } else {
+                                //if (c.getPlayer().hasEquipped(1122242)) {//
+                                //    chr.gainMeso(mapitem.getMeso() + (mapitem.getMeso()/20), true);
+                                //} else if (c.getPlayer().hasEquipped(1122244)) {//
+                                //    chr.gainMeso(mapitem.getMeso() + (mapitem.getMeso()/10), true);
+                                //} else {
+                                chr.gainMeso(mapitem.getMeso(), true);
+                                //}
+                            }
+                            c.getSession().write(MaplePacketCreator.enableActions());
+                        }
+                        removeItem(chr, mapitem, ob);
+                    } else {
+                        if (MapleItemInformationProvider.getInstance().isPickupBlocked(mapitem.getItemId())) {
+                            c.getSession().write(MaplePacketCreator.enableActions());
+                            c.getPlayer().dropMessage(5, "이 아이템은 주울 수 없습니다.");
+                        } else if (useItem(c, mapitem.getItemId())) {
+                            removeItem(c.getPlayer(), mapitem, ob);
+                        } else if (mapitem.getItemId() / 10000 != 291 && MapleInventoryManipulator.checkSpace(c, mapitem.getItemId(), mapitem.getItem().getQuantity(), mapitem.getItem().getOwner())) {
+                            if (mapitem.getItem().getQuantity() >= 50 && mapitem.getItemId() == 2340000) {
+                                c.setMonitored(true); //hack check
+                            }
+                            if (c.getPlayer().getInventory(GameConstants.getInventoryType(mapitem.getItemId())).getNextFreeSlot() > -1) {
+                                MapleInventoryManipulator.addFromDrop(c, mapitem.getItem(), true, mapitem.getDropper() instanceof MapleMonster);
+                                removeItem(chr, mapitem, ob);
+                            } else {
+                                c.getSession().write(MaplePacketCreator.enableActions());
+                                c.getPlayer().dropMessage(5, "인벤토리가 꽉 차 아이템을 주울 수 없습니다.");
+                            }
+
+                        } else {
+                            c.getSession().write(InventoryPacket.getInventoryFull());
+                            c.getSession().write(InventoryPacket.getShowInventoryFull());
+                            c.getSession().write(MaplePacketCreator.enableActions());
+                        }
+                    }
+                } finally {
+                    lock.unlock();
+                }
+            }
+        }
+
     }
 
     public static final boolean useItem(final MapleClient c, final int id) {

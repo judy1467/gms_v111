@@ -28,7 +28,7 @@ import server.ServerProperties;
 
 public class ServerConstants {// 아이피 설정
     
-    /*
+    /* //ServerConstants.ini 과 연동 (수정필요)
     public static final int expRate = Integer.parseInt(ServerProperties.getProperty("기본경험치"));   //경험치
     
     public static final int expRate1 = Integer.parseInt(ServerProperties.getProperty("경험치1"));   //1~120
