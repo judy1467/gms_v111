@@ -59,42 +59,27 @@ public class ServerConstants {// 아이피 설정
     public static final String recomMessage = new String(ServerProperties.getProperty("채널추천메세지"));
     public static final int flag = Byte.parseByte(ServerProperties.getProperty("깃발"));
     public static final int maxCharacters = 6; //캐릭터수*/
-    public static final int expRate = 7;   //경험치
+    public static final int expRate = 30;   //경험치
     
-    public static final int expRate1 = 7;   //1~120
-    public static final int expRate2 = 7;   //121~199
-    public static final int expRate3 = 7;   //200~251
+    public static final int expRate1 = 30;   //1~120
+    public static final int expRate2 = 20;   //121~199
+    public static final int expRate3 = 10;   //200~251
     
-    public static final int dropRate = 3;   // 드롭
-    public static final int mesoRate = 3;   // 메소
+    public static final int dropRate = 5;   // 드롭
+    public static final int mesoRate = 10;   // 메소
     
     public static final int cashRate = 1;   // 캐시
-    public static final int questRate = 2;  // 퀘스트경험치배율
+    public static final int questRate = 15;  // 퀘스트경험치배율
     public static final int userLimit = 100; // 채널당 동접수
     public static final int channelcount = 4; //채널수
     public static String adminIP, adminIP2, adminIP3, adminIP4;
     
-    public static final String ip = "gyrl.kro.kr"; // ththaud.codns.com  127.0.0.1
-    public static String host = "gyrl.kro.kr";//125.188.255.195
+    public static final String ip = "127.0.0.1"; // 루프백ip
+    public static String host = "127.0.0.1"; // 루프백ip
     public static String SQL_URL = "jdbc:mysql://localhost:3306/sio1114?autoReconnect=true&characterEncoding=euckr";
     public static String SQL_USER = "root";
-    public static String SQL_PASSWORD = "wodnjs"; 
-    
-    /*
-    public static final String ip = "175.116.6.175"; // ththaud.codns.com  127.0.0.1
-    public static String host = "175.116.6.175";
-    public static String SQL_URL = "jdbc:mysql://localhost:3306/maplestory2?autoReconnect=true&characterEncoding=euckr";
-    public static String SQL_USER = "root";
-    public static String SQL_PASSWORD = "diqzkd15492!!!"; 
-    */
-    
-    /*
-    public static final String ip = "ththaud.codns.com"; // ththaud.codns.com
-    public static String host = "ththaud.codns.com";
-    public static String SQL_URL = "jdbc:mysql://localhost:3306/maplestory?autoReconnect=true&characterEncoding=euckr";
-    public static String SQL_USER = "root";
-    public static String SQL_PASSWORD = "940408"; 
-*/
+    public static String SQL_PASSWORD = "root";
+
     public static final String cshopNpc = "9900000"; //캐시샾 엔피시
     public static final String serverMassage = ""; 
     public static final String serverName = "플레이스타"; //서버닉네임

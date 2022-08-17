@@ -62,6 +62,7 @@ public abstract class AbstractScriptManager {
                     c.setScriptEngine(path, engine);
                 }
                 fr = new FileReader(scriptFile);
+                engine.eval("load('nashorn:mozilla_compat.js');");
                 engine.eval(fr);
             } else if (c != null && npc) {
                 c.getPlayer().dropMessage(-1, "You already are talking to this NPC. Use @ea if this is not intended.");

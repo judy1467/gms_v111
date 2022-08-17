@@ -44,7 +44,7 @@ import tools.Pair;
 
 public class LoginServer { // 포트 설정
 
-    public static final int PORT = 9100;
+    public static final int PORT = 8484;
     private static InetSocketAddress InetSocketadd;
     private static IoAcceptor acceptor;
     private static Map<Integer, Integer> load = new HashMap<Integer, Integer>();
