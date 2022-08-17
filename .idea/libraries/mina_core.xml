@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="mina-core">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../Gms111/dist/lib/mina-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Gms111/dist/lib/mysql-connector-java-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Gms111/dist/lib/slf4j-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Gms111/dist/lib/slf4j-jdk14.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

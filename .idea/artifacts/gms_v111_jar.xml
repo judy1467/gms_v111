@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="gms_v111:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/gms_v111_jar</output-path>
+    <root id="archive" name="gms_v111.jar">
+      <element id="module-output" name="gms_v111" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Gms111/dist/lib/mina-core.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Gms111/dist/lib/mysql-connector-java-bin.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Gms111/dist/lib/slf4j-api.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Gms111/dist/lib/slf4j-jdk14.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
