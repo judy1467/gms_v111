@@ -59,17 +59,17 @@ public class ServerConstants {// 아이피 설정
     public static final String recomMessage = new String(ServerProperties.getProperty("채널추천메세지"));
     public static final int flag = Byte.parseByte(ServerProperties.getProperty("깃발"));
     public static final int maxCharacters = 6; //캐릭터수*/
-    public static final int expRate = 30;   //경험치
+    public static final int expRate = 50;   //경험치
     
-    public static final int expRate1 = 30;   //1~120
-    public static final int expRate2 = 20;   //121~199
-    public static final int expRate3 = 10;   //200~251
+    public static final int expRate1 = 50;   //1~120
+    public static final int expRate2 = 40;   //121~199
+    public static final int expRate3 = 30;   //200~251
     
-    public static final int dropRate = 5;   // 드롭
-    public static final int mesoRate = 10;   // 메소
+    public static final int dropRate = 3;   // 드롭
+    public static final int mesoRate = 20;   // 메소
     
     public static final int cashRate = 1;   // 캐시
-    public static final int questRate = 15;  // 퀘스트경험치배율
+    public static final int questRate = 30;  // 퀘스트경험치배율
     public static final int userLimit = 100; // 채널당 동접수
     public static final int channelcount = 4; //채널수
     public static String adminIP, adminIP2, adminIP3, adminIP4;
