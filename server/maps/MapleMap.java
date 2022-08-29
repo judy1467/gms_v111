@@ -3125,8 +3125,8 @@ public final class MapleMap {
                     }
                 }
             }
-        } else {
-            final int numShouldSpawn = (GameConstants.isForceRespawn(mapid) ? monsterSpawn.size() : maxRegularSpawn * 5) - spawnedMonstersOnMap.get();
+        } else { // maxRegularSpawn * 7 몹 젠률 조정
+            final int numShouldSpawn = (GameConstants.isForceRespawn(mapid) ? monsterSpawn.size() : maxRegularSpawn * 7) - spawnedMonstersOnMap.get();
             if (numShouldSpawn > 0) {
                 int spawned = 0;
 
