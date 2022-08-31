@@ -4737,9 +4737,4 @@ public class InventoryHandler {
             }
         }
     }
-
-    public static final void autoLoot2(MapleCharacter chr, MapleClient c) { //only meso
-        for(
-    }
-
 }
