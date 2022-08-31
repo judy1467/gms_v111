@@ -399,7 +399,8 @@ public class MapleMonster extends AbstractLoadedMapleLife {
                 Equipment_Bonus_EXP += (int) ((exp / 100.0) * attacker.getFairyExp());
             }
             if (attacker.getClient().getChannelServer().isBurning()) {
-                exp += (int) exp / 2 ;
+                //exp += (int) exp / 2 ;
+                exp += (int) exp ;
             }
             if (attacker.getInventory(MapleInventoryType.EQUIPPED).findById(1122017) != null && attacker.getPendantExp() > 0 || attacker.getInventory(MapleInventoryType.EQUIPPED).findById(1122156) != null && attacker.getPendantExp() > 0) {
                 Equipment_Bonus_EXP += (int) exp / 10 * attacker.getPendantExp();

@@ -4043,7 +4043,6 @@ public class InventoryHandler {
     }
 
     public static final void Pickup_Pet(final LittleEndianAccessor slea, final MapleClient c, final MapleCharacter chr) {
-        /*
         if (chr == null) {
             return;
         }
@@ -4738,4 +4737,9 @@ public class InventoryHandler {
             }
         }
     }
+
+    public static final void autoLoot2(MapleCharacter chr, MapleClient c) { //only meso
+        for(
+    }
+
 }

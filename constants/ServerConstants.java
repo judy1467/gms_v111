@@ -28,7 +28,7 @@ import server.ServerProperties;
 
 public class ServerConstants {// 아이피 설정
     
-    /* //ServerConstants.ini 과 연동 (수정필요)
+    //ServerConstants.ini 과 연동 (수정필요)
     public static final int expRate = Integer.parseInt(ServerProperties.getProperty("기본경험치"));   //경험치
     
     public static final int expRate1 = Integer.parseInt(ServerProperties.getProperty("경험치1"));   //1~120
@@ -41,11 +41,11 @@ public class ServerConstants {// 아이피 설정
     public static final int cashRate = 1;   // 캐시
     public static final int questRate = 6;  // 퀘스트경험치배율
     public static final int userLimit = Integer.parseInt(ServerProperties.getProperty("최대동접")); // 채널당 동접수
-    public static final int channelcount = 1; //채널수
+    public static final int channelcount = 4; //채널수
     
     public static final String ip = new String(ServerProperties.getProperty("아이피")); // ththaud.codns.com
     public static String host = ip;
-    public static String SQL_URL = "jdbc:mysql://localhost:3306/maplestory?autoReconnect=true&characterEncoding=euckr";
+    public static String SQL_URL = "jdbc:mysql://localhost:3306/" + new String(ServerProperties.getProperty("쿼리")) + "?autoReconnect=true&characterEncoding=euckr";
     public static String SQL_USER = new String(ServerProperties.getProperty("쿼리계정"));
     public static String SQL_PASSWORD = new String(ServerProperties.getProperty("쿼리암호")); 
 
@@ -58,7 +58,9 @@ public class ServerConstants {// 아이피 설정
     public static final String eventMessage = new String(ServerProperties.getProperty("채널메세지")); //채널메세지
     public static final String recomMessage = new String(ServerProperties.getProperty("채널추천메세지"));
     public static final int flag = Byte.parseByte(ServerProperties.getProperty("깃발"));
-    public static final int maxCharacters = 6; //캐릭터수*/
+    public static final int maxCharacters = 6; //캐릭터수
+
+    /*
     public static final int expRate = 50;   //경험치
     
     public static final int expRate1 = 50;   //1~120
@@ -76,20 +78,22 @@ public class ServerConstants {// 아이피 설정
     
     public static final String ip = "127.0.0.1"; // 루프백ip
     public static String host = "127.0.0.1"; // 루프백ip
-    public static String SQL_URL = "jdbc:mysql://localhost:3306/sio1114?autoReconnect=true&characterEncoding=euckr";
-    public static String SQL_USER = "root";
-    public static String SQL_PASSWORD = "root";
+    public static String SQL_URL = "jdbc:mysql://localhost:3306/sio1114?autoReconnect=true&characterEncoding=euckr"; //쿼리
+    public static String SQL_USER = "root"; //쿼리계정
+    public static String SQL_PASSWORD = "root"; //쿼리암호
 
     public static final String cshopNpc = "9900000"; //캐시샾 엔피시
-    public static final String serverMassage = ""; 
+    public static final String serverMassage = ""; //서버메세지
     public static final String serverName = "플레이스타"; //서버닉네임
     public static final boolean adminonly = false;
     public static final String event = "cpq,cpq2,TamePig,MonsterPark,Flight,elevator,Trains,Hak,Geenie,Subway,newCharacter,AirPlane,Olivia,PVP,CygnusBattle,ScarTarBattle,VonLeonBattle,Ghost,MV,OrbisPQ,HenesysPQ,Romeo,Juliet,Pirate,Amoria,Ellin,CWKPQ,AutomatedEvent,DollHouse,BossBalrog_EASY,BossBalrog_NORMAL,HorntailBattle,Nibergen,PinkBeanBattle,ZakumBattle,NamelessMagicMonster,Dunas,Dunas2,tokyo_2095,ZakumPQ,LudiPQ,KerningPQ,ProtectTylus,WitchTower_EASY,WitchTower_Med,WitchTower_Hard,Vergamot,ChaosHorntail,ChaosZakum,CoreBlaze,BossQuestEASY,BossQuestMed,BossQuestHARD,BossQuestHELL,Ravana_EASY,Ravana_HARD,Ravana_MED,GuildQuest,Aufhaven,Dragonica,AutoItemMsg";
     
     public static final String eventMessage = "플레이스타"; //채널메세지
-    public static final String recomMessage = "";
-    public static final int flag = 3;
+    public static final String recomMessage = ""; //채널추천메세지
+    public static final int flag = 3; //깃발
     public static final int maxCharacters = 6; //캐릭터수
+
+     */
     
     public static short text = 90;
     public static boolean TESPIA = false; // true = uses GMS test server, for MSEA it does nothing though

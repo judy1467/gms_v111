@@ -280,7 +280,7 @@ public class AdminCommand {
                     c.getPlayer().getClient().getChannelServer().setBurning(true);
                     c.getPlayer().dropMessage(1, "버닝 켜짐");
                     World.Broadcast.broadcastMessage(MaplePacketCreator.serverNotice(6, "현재 " + c.getPlayer().getClient().getChannel() + "채널에서 버닝이벤트가 진행되고 있습니다."));
-                    World.Broadcast.broadcastMessage(MaplePacketCreator.serverNotice(6, "이벤트 기간동안은 얻는 경험치의 1.5배 만큼 더 받게 됩니다."));
+                    World.Broadcast.broadcastMessage(MaplePacketCreator.serverNotice(6, "이벤트 기간동안은 얻는 경험치의 2배 만큼 더 받게 됩니다."));
             } else {
                     c.getPlayer().getClient().getChannelServer().setBurning(false);
                     c.getPlayer().dropMessage(1, "버닝 꺼짐");
@@ -298,7 +298,8 @@ public class AdminCommand {
             return 1;
         }
     }
-    
+
+    public static class 찾기 extends AdminCommand.검색 {}
     public static class 검색 extends CommandExecute {
 
         @Override
