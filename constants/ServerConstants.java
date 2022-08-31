@@ -38,10 +38,10 @@ public class ServerConstants {// 아이피 설정
     public static final int dropRate = Integer.parseInt(ServerProperties.getProperty("드롭"));   // 드롭
     public static final int mesoRate = Integer.parseInt(ServerProperties.getProperty("메소"));   // 메소
     
-    public static final int cashRate = 1;   // 캐시
-    public static final int questRate = 6;  // 퀘스트경험치배율
+    public static final int cashRate = Integer.parseInt(ServerProperties.getProperty("캐시"));   // 캐시
+    public static final int questRate = Integer.parseInt(ServerProperties.getProperty("퀘스트경험치"));  // 퀘스트경험치배율
     public static final int userLimit = Integer.parseInt(ServerProperties.getProperty("최대동접")); // 채널당 동접수
-    public static final int channelcount = 4; //채널수
+    public static final int channelcount = Integer.parseInt(ServerProperties.getProperty("채널수")); //채널수
     
     public static final String ip = new String(ServerProperties.getProperty("아이피")); // ththaud.codns.com
     public static String host = ip;
