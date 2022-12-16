@@ -29,6 +29,7 @@ import constants.ServerConstants;
 import constants.GameConstants;
 import server.ServerProperties;
 import java.io.PrintStream;
+import com.mysql.jdbc.Driver;
 
 //
 public class DatabaseConnection {

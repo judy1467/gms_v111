@@ -23,44 +23,45 @@ package constants;
 import java.util.List;
 import java.util.LinkedList;
 import server.ServerProperties;
+import com.mysql.jdbc.Driver;
 
 
 
 public class ServerConstants {// 아이피 설정
-    
+    /*
     //ServerConstants.ini 과 연동 (수정필요)
-    public static final int expRate = Integer.parseInt(ServerProperties.getProperty("기본경험치"));   //경험치
+    public static final int expRate = Integer.parseInt(ServerProperties.getProperty("exp"));   //경험치
     
-    public static final int expRate1 = Integer.parseInt(ServerProperties.getProperty("경험치1"));   //1~120
-    public static final int expRate2 = Integer.parseInt(ServerProperties.getProperty("경험치2"));   //121~199
-    public static final int expRate3 = Integer.parseInt(ServerProperties.getProperty("경험치3"));   //200~251
+    public static final int expRate1 = Integer.parseInt(ServerProperties.getProperty("exp1"));   //1~120
+    public static final int expRate2 = Integer.parseInt(ServerProperties.getProperty("exp2"));   //121~199
+    public static final int expRate3 = Integer.parseInt(ServerProperties.getProperty("exp3"));   //200~251
     
-    public static final int dropRate = Integer.parseInt(ServerProperties.getProperty("드롭"));   // 드롭
-    public static final int mesoRate = Integer.parseInt(ServerProperties.getProperty("메소"));   // 메소
+    public static final int dropRate = Integer.parseInt(ServerProperties.getProperty("drop"));   // 드롭
+    public static final int mesoRate = Integer.parseInt(ServerProperties.getProperty("meso"));   // 메소
     
-    public static final int cashRate = Integer.parseInt(ServerProperties.getProperty("캐시"));   // 캐시
-    public static final int questRate = Integer.parseInt(ServerProperties.getProperty("퀘스트경험치"));  // 퀘스트경험치배율
-    public static final int userLimit = Integer.parseInt(ServerProperties.getProperty("최대동접")); // 채널당 동접수
-    public static final int channelcount = Integer.parseInt(ServerProperties.getProperty("채널수")); //채널수
+    public static final int cashRate = Integer.parseInt(ServerProperties.getProperty("cash"));   // 캐시
+    public static final int questRate = Integer.parseInt(ServerProperties.getProperty("questExp"));  // 퀘스트경험치배율
+    public static final int userLimit = Integer.parseInt(ServerProperties.getProperty("maxUser")); // 채널당 동접수
+    public static final int channelcount = Integer.parseInt(ServerProperties.getProperty("channelCount")); //채널수
     
-    public static final String ip = new String(ServerProperties.getProperty("아이피")); // ththaud.codns.com
+    public static final String ip = new String(ServerProperties.getProperty("ip")); // ththaud.codns.com, 호스트 ip
     public static String host = ip;
-    public static String SQL_URL = "jdbc:mysql://localhost:3306/" + new String(ServerProperties.getProperty("쿼리")) + "?autoReconnect=true&characterEncoding=euckr";
-    public static String SQL_USER = new String(ServerProperties.getProperty("쿼리계정"));
-    public static String SQL_PASSWORD = new String(ServerProperties.getProperty("쿼리암호")); 
+    public static String SQL_URL = "jdbc:mysql://localhost:3306/" + new String(ServerProperties.getProperty("query")) + "?autoReconnect=true&characterEncoding=euckr";
+    public static String SQL_USER = new String(ServerProperties.getProperty("queryId"));
+    public static String SQL_PASSWORD = new String(ServerProperties.getProperty("queryPw"));
 
-    public static final String cshopNpc = new String(ServerProperties.getProperty("캐시샵엔피시")); //캐시샾 엔피시
-    public static final String serverMassage = new String(ServerProperties.getProperty("서버메세지")); 
-    public static final String serverName = new String(ServerProperties.getProperty("서버이름")); //서버닉네임
+    public static final String cshopNpc = new String(ServerProperties.getProperty("csNpc")); //캐시샾 엔피시
+    public static final String serverMassage = new String(ServerProperties.getProperty("serverMessage"));
+    public static final String serverName = new String(ServerProperties.getProperty("serverName")); //서버닉네임
     public static final boolean adminonly = false;
     public static final String event = "cpq,cpq2,TamePig,MonsterPark,Boats,Flight,elevator,Trains,Hak,Geenie,Subway,newCharacter,AirPlane,Olivia,PVP,CygnusBattle,ScarTarBattle,VonLeonBattle,Ghost,MV,OrbisPQ,HenesysPQ,Romeo,Juliet,Pirate,Amoria,Ellin,CWKPQ,AutomatedEvent,DollHouse,BossBalrog_EASY,BossBalrog_NORMAL,HorntailBattle,Nibergen,PinkBeanBattle,ZakumBattle,NamelessMagicMonster,Dunas,Dunas2,tokyo_2095,ZakumPQ,LudiPQ,KerningPQ,ProtectTylus,WitchTower_EASY,WitchTower_Med,WitchTower_Hard,Vergamot,ChaosHorntail,ChaosZakum,CoreBlaze,BossQuestEASY,BossQuestMed,BossQuestHARD,BossQuestHELL,Ravana_EASY,Ravana_HARD,Ravana_MED,GuildQuest,Aufhaven,Dragonica,AutoItemMsg";
     
-    public static final String eventMessage = new String(ServerProperties.getProperty("채널메세지")); //채널메세지
-    public static final String recomMessage = new String(ServerProperties.getProperty("채널추천메세지"));
-    public static final int flag = Byte.parseByte(ServerProperties.getProperty("깃발"));
+    public static final String eventMessage = new String(ServerProperties.getProperty("channelMessage")); //채널메세지
+    public static final String recomMessage = new String(ServerProperties.getProperty("channelMessage2"));
+    public static final int flag = Byte.parseByte(ServerProperties.getProperty("flag"));
     public static final int maxCharacters = 6; //캐릭터수
+*/
 
-    /*
     public static final int expRate = 50;   //경험치
     
     public static final int expRate1 = 50;   //1~120
@@ -93,7 +94,7 @@ public class ServerConstants {// 아이피 설정
     public static final int flag = 3; //깃발
     public static final int maxCharacters = 6; //캐릭터수
 
-     */
+
     
     public static short text = 90;
     public static boolean TESPIA = false; // true = uses GMS test server, for MSEA it does nothing though

@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.awt.Point;
 
+import client.MagicWheel;
 import client.inventory.Equip;
 import client.inventory.Equip.ScrollResult;
 import client.inventory.Item;
@@ -4043,87 +4044,6 @@ public class InventoryHandler {
     }
 
     public static final void Pickup_Pet(final LittleEndianAccessor slea, final MapleClient c, final MapleCharacter chr) {
-        if (chr == null) {
-            return;
-        }
-        if (c.getPlayer().hasBlockedInventory() || c.getPlayer().inPVP()) { //hack
-            return;
-        }
-        c.getPlayer().setScrolledPosition((short) 0);
-        final byte petz = (byte) (GameConstants.GMS ? (c.getPlayer().getPetIndex((int) slea.readLong())) : slea.readInt());
-        final MaplePet pet = chr.getPet(petz);
-        slea.skip(1); // [4] Zero, [4] Seems to be tickcount, [1] Always zero
-        chr.updateTick(slea.readInt());
-        final Point Client_Reportedpos = slea.readPos();
-        final MapleMapObject ob = chr.getMap().getMapObject(slea.readInt(), MapleMapObjectType.ITEM);
-
-        if (ob == null || pet == null) {
-            return;
-        }
-        final MapleMapItem mapitem = (MapleMapItem) ob;
-        final Lock lock = mapitem.getLock();
-        lock.lock();
-        try {
-            if (mapitem.isPickedUp()) {
-                c.getSession().write(InventoryPacket.getInventoryFull());
-                return;
-            }
-            if (mapitem.getOwner() != chr.getId() && mapitem.isPlayerDrop()) {
-                return;
-            }
-            if (mapitem.getOwner() != chr.getId() && ((!mapitem.isPlayerDrop() && mapitem.getDropType() == 0) || (mapitem.isPlayerDrop() && chr.getMap().getEverlast()))) {
-                return;
-            }
-            if (mapitem.getOwner() != chr.getId() && ((!mapitem.isPlayerDrop() && mapitem.getDropType() == 0) || (mapitem.isPlayerDrop() && chr.getMap().getEverlast()))) {
-                return;
-            }
-            if (!mapitem.isPlayerDrop() && mapitem.getDropType() == 1 && mapitem.getOwner() != chr.getId() && (chr.getParty() == null || chr.getParty().getMemberById(mapitem.getOwner()) == null)) {
-                return;
-            }
-            final double Distance = Client_Reportedpos.distanceSq(mapitem.getPosition());
-            if (Distance > 10000 && (mapitem.getMeso() > 0 || mapitem.getItemId() != 4001025)) {
-                chr.getCheatTracker().registerOffense(CheatingOffense.PET_ITEMVAC_CLIENT, String.valueOf(Distance));
-            } else if (pet.getPos().distanceSq(mapitem.getPosition()) > 640000.0) {
-                chr.getCheatTracker().registerOffense(CheatingOffense.PET_ITEMVAC_SERVER);
-
-            }
-
-            if (mapitem.getMeso() > 0) {
-                if (chr.getParty() != null && mapitem.getOwner() != chr.getId()) {
-                    final List<MapleCharacter> toGive = new LinkedList<MapleCharacter>();
-                    final int splitMeso = mapitem.getMeso() * 40 / 100;
-                    for (MaplePartyCharacter z : chr.getParty().getMembers()) {
-                        MapleCharacter m = chr.getMap().getCharacterById(z.getId());
-                        if (m != null && m.getId() != chr.getId()) {
-                            toGive.add(m);
-                        }
-                    }
-                    for (final MapleCharacter m : toGive) {
-                        m.gainMeso(splitMeso / toGive.size() + (m.getStat().hasPartyBonus ? (int) (mapitem.getMeso() / 20.0) : 0), true);
-                    }
-                    chr.gainMeso(mapitem.getMeso() - splitMeso, true);
-                } else {
-                    chr.gainMeso(mapitem.getMeso(), true);
-                }
-                removeItem_Pet(chr, mapitem, petz);
-            } else {
-                if (MapleItemInformationProvider.getInstance().isPickupBlocked(mapitem.getItemId()) || mapitem.getItemId() / 10000 == 291) {
-                    c.getSession().write(MaplePacketCreator.enableActions());
-                } else if (useItem(c, mapitem.getItemId())) {
-                    removeItem_Pet(chr, mapitem, petz);
-                } else if (MapleInventoryManipulator.checkSpace(c, mapitem.getItemId(), mapitem.getItem().getQuantity(), mapitem.getItem().getOwner())) {
-                    if (mapitem.getItem().getQuantity() >= 50 && mapitem.getItemId() == 2340000) {
-                        c.setMonitored(true); //hack check
-                    }
-                    MapleInventoryManipulator.addFromDrop(c, mapitem.getItem(), true, mapitem.getDropper() instanceof MapleMonster, false);
-                    removeItem_Pet(chr, mapitem, petz);
-                }
-            }
-        } finally {
-            lock.unlock();
-        }
-        */
-
         if (chr == null) {
             return;
         }
